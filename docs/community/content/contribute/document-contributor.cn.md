@@ -10,9 +10,9 @@ chapter = true
 
 ## 前置条件
 
-- 熟悉[官方网站](https://shardingsphere.apache.org)
-- 熟悉[GitHub 协同开发流程](https://help.github.com/categories/collaborating-with-issues-and-pull-requests/)
-- 熟练掌握[Markdown](http://www.markdown.cn/)
+- 熟悉[官方网站](https://shardingsphere.apache.org/index_zh.html)
+- 熟悉[GitHub 协同开发流程](https://help.github.com/cn/github/collaborating-with-issues-and-pull-requests)
+- 熟练掌握[Markdown](https://help.github.com/cn/github/writing-on-github/basic-writing-and-formatting-syntax)
 - 熟悉[Hugo](https://gohugo.io/)
 
 ## Fork文档项目
@@ -54,12 +54,12 @@ shardingsphere
   │  │  │      ├─function
   │  │  │      └─principle
   │  │  ├─manual
-  │  │  │  ├─sharding-jdbc
+  │  │  │  ├─shardingsphere-jdbc
   │  │  │  │  ├─configuration
   │  │  │  │  └─usage
-  │  │  │  ├─sharding-proxy
-  │  │  │  ├─sharding-sidecar
-  │  │  │  └─sharding-ui
+  │  │  │  ├─shardingsphere-proxy
+  │  │  │  ├─shardingsphere-sidecar
+  │  │  │  └─shardingsphere-ui
   │  │  ├─overview
   │  │  └─quick-start
   │  ├─i18n
