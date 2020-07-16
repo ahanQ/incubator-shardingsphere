@@ -22,6 +22,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Properties;
+import org.apache.shardingsphere.control.panel.spi.FacadeConfiguration;
 
 /**
  * Metrics configuration.
@@ -29,7 +30,9 @@ import java.util.Properties;
 @Getter
 @Setter
 @AllArgsConstructor
-public final class MetricsConfiguration {
+public final class MetricsConfiguration implements FacadeConfiguration {
+    
+    public static final Integer DEFAULT_PORT = 9190;
     
     private String metricsName;
     
@@ -38,6 +41,8 @@ public final class MetricsConfiguration {
     private Integer port;
     
     private Boolean async;
+    
+    private Boolean enable;
     
     private Integer threadCount;
     

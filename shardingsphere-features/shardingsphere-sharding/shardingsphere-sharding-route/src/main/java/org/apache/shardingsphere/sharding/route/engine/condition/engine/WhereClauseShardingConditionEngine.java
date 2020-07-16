@@ -35,7 +35,9 @@ import org.apache.shardingsphere.sql.parser.binder.type.WhereAvailable;
 import org.apache.shardingsphere.sql.parser.sql.segment.dml.predicate.AndPredicate;
 import org.apache.shardingsphere.sql.parser.sql.segment.dml.predicate.PredicateSegment;
 import org.apache.shardingsphere.sql.parser.sql.segment.dml.predicate.WhereSegment;
+import org.apache.shardingsphere.sql.parser.sql.statement.dml.SelectStatement;
 import org.apache.shardingsphere.sql.parser.sql.util.SafeRangeOperationUtils;
+import org.apache.shardingsphere.sql.parser.sql.util.WhereSegmentExtractUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -73,14 +75,14 @@ public final class WhereClauseShardingConditionEngine {
         if (whereSegment.isPresent()) {
             result.addAll(createShardingConditions(sqlStatementContext, whereSegment.get().getAndPredicates(), parameters));
         }
-        // FIXME process subquery
-//        Collection<SubqueryPredicateSegment> subqueryPredicateSegments = sqlStatementContext.findSQLSegments(SubqueryPredicateSegment.class);
-//        for (SubqueryPredicateSegment each : subqueryPredicateSegments) {
-//            Collection<ShardingCondition> subqueryShardingConditions = createShardingConditions((WhereSegmentAvailable) sqlStatementContext, each.getAndPredicates(), parameters);
-//            if (!result.containsAll(subqueryShardingConditions)) {
-//                result.addAll(subqueryShardingConditions);
-//            }
-//        }
+        Collection<WhereSegment> subqueryWhereSegments = sqlStatementContext.getSqlStatement() instanceof SelectStatement
+                ? WhereSegmentExtractUtils.getSubqueryWhereSegments((SelectStatement) sqlStatementContext.getSqlStatement()) : Collections.emptyList();
+        for (WhereSegment each : subqueryWhereSegments) {
+            Collection<ShardingCondition> subqueryShardingConditions = createShardingConditions(sqlStatementContext, each.getAndPredicates(), parameters);
+            if (!result.containsAll(subqueryShardingConditions)) {
+                result.addAll(subqueryShardingConditions);
+            }
+        }
         return result;
     }
     
